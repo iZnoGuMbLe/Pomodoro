@@ -1,12 +1,17 @@
 import os
 
 import redis
+from settings import Settings
+
+
+
 
 def get_redis_connection() -> redis.Redis:
+    setings = Settings()
     return redis.Redis(
-        host="localhost",
-        port=6379,
-        db= 0)
+        host=setings.CACHE_HOST,
+        port=setings.CACHE_PORT,
+        db= setings.CACHE_DB)
 
 
 def set_pomodoro_counts():
