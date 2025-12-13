@@ -1,5 +1,12 @@
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    sqlite_name: str = 'pomodoro1.sqlite'
+    DB_HOST: str = '0.0.0.0'
+    DB_PORT: int = 5432
+    DB_USER: str = 'postgres'
+    DB_PASSWORD: str = 'password'
+    DB_NAME: str = 'pomodoro'
+    CACHE_HOST: str = '0.0.0.0'
+    CACHE_PORT: int = 6379
+    CACHE_DB: str = 'cache_db'
 
