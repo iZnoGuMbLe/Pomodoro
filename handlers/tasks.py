@@ -3,7 +3,6 @@ from typing import Annotated
 
 from dependencies import get_task_repository, get_cache_task_repository, get_task_serv_dep
 from repository import TaskRepository, CacheTask
-from database.database import session_db
 from schema.tasks_validation import TaskSchema
 from service import TaskService
 

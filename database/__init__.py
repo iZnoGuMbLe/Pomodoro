@@ -1,6 +1,6 @@
-from database.models import Tasks, Categories, Base
-from database.database import session_db
+from database.database import Base
+from database.db_accessor import session_db
 
 
-__all__ = ['Tasks', 'Categories']
+__all__ = ['session_db','Base']
 
