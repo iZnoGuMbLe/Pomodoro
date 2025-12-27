@@ -10,7 +10,7 @@ class TaskService:
     task_repository: TaskRepository
     task_cache:CacheTask
 
-    def get_tasks_service(self):
+    def get_tasks_service(self) -> list[TaskSchema]:
         cache_task = self.task_cache.get_tasks_c()
         if cache_task is not None:
             return cache_task

@@ -19,3 +19,5 @@ class Categories(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     type: Mapped[str]
     name: Mapped[str]
+
+
