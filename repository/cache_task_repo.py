@@ -2,6 +2,7 @@ import json
 
 from redis import Redis
 
+
 from schema.tasks_validation import TaskSchema
 
 
@@ -18,6 +19,9 @@ class CacheTask:
 
 
     def set_tasks_c(self, tasks: list[TaskSchema]):
+        if not tasks:
+            return
+
         tasks_json = [task.model_dump_json() for task in tasks]
         with self.redis as redis:
             redis.lpush('tasks_c', *tasks_json)
