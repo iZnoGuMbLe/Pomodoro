@@ -2,6 +2,8 @@ from fastapi import APIRouter, HTTPException
 from fastapi.params import Depends
 from typing import Annotated
 
+from starlette.responses import RedirectResponse
+
 from dependencies import get_auth_service
 from exception import UserNotFound, UserIncorrectPassword
 from schema import UserLoginSchema, UserCreateSchema
@@ -30,3 +32,48 @@ async def login(
             status_code=404,
             detail=e.detail
         )
+
+
+@router.get(
+    "/login/google",
+    response_class=RedirectResponse
+)
+async def google_login(
+        auth_service: Annotated[AuthService, Depends(get_auth_service)]
+):
+    redirect_url = auth_service.get_google_redirect_url()
+    print(redirect_url)
+    return RedirectResponse(redirect_url)
+
+
+@router.get(
+    "/google"
+)
+async def google_auth(
+        auth_service: Annotated[AuthService, Depends(get_auth_service)],
+        code: str
+    ):
+    return auth_service.google_auth(code=code)
+
+
+@router.get(
+    "/login/yandex",
+)
+
+async def yandex_login(
+        auth_service: Annotated[AuthService, Depends(get_auth_service)]
+):
+    redirect_uri = auth_service.get_yandex_redirect_uri()
+    print(redirect_uri)
+    return RedirectResponse(redirect_uri)
+
+@router.get(
+    "/yandex"
+)
+async def yandex_auth(
+        auth_service: Annotated[AuthService, Depends(get_auth_service)],
+        code: str
+    ):
+    return auth_service.yandex_auth(code=code)
+
+
