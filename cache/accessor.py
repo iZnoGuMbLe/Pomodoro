@@ -1,17 +1,16 @@
-import os
 
-import redis
+from redis import asyncio as redis
 from settings import Settings
 
 
 
 
 def get_redis_connection() -> redis.Redis:
-    setings = Settings()
+    settings = Settings()
     return redis.Redis(
-        host=setings.CACHE_HOST,
-        port=setings.CACHE_PORT,
-        db= setings.CACHE_DB)
+        host=settings.CACHE_HOST,
+        port=settings.CACHE_PORT,
+        db= settings.CACHE_DB)
 
 
 def set_pomodoro_counts():
