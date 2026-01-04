@@ -11,7 +11,7 @@ router = APIRouter(prefix='/task123',tags=['task'])
 
 @router.get('/all', response_model=list[TaskSchema])
 async def get_tasks(task_service: Annotated[TaskService,Depends(get_task_serv_dep)]):
-    return task_service.get_tasks_service()
+    return await task_service.get_tasks_service()
 
 
 
@@ -19,7 +19,7 @@ async def get_tasks(task_service: Annotated[TaskService,Depends(get_task_serv_de
 async def create_task(task_body:TaskCreateSchema,
                       task_service: Annotated[TaskService, Depends(get_task_serv_dep)],
                       user_id:int = Depends(get_request_user_id)):
-    task = task_service.create_task_service(task_body, user_id)
+    task = await task_service.create_task_service(task_body, user_id)
     return TaskSchema.model_validate(task)
 
 
@@ -32,7 +32,7 @@ async def update_task(
         user_id: int = Depends(get_request_user_id)
         ):
     try:
-        return task_service.update_task_name(task_id=task_id,name=name,pomodoro_count=pomodoro_count, user_id=user_id)
+        return await task_service.update_task_name(task_id=task_id,name=name,pomodoro_count=pomodoro_count, user_id=user_id)
     except TaskNotFound as e:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -48,7 +48,7 @@ async def delete_task(task_id: int,
                       user_id:  int = Depends(get_request_user_id)
                       ):
     try:
-        task_service.delete_task(task_id=task_id,user_id=user_id)
+        await task_service.delete_task(task_id=task_id,user_id=user_id)
     except TaskNotFound as e:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
