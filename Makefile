@@ -1,5 +1,5 @@
 run:
-	uvicorn main:app --reload --env-file .local.env
+	poetry run gunicorn app.main:app -c gunicorn.conf.py
 
 migrate-create:
 	alembic revision --autogenerate -m $(NAME)
