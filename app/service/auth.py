@@ -1,3 +1,4 @@
+import datetime
 from dataclasses import dataclass
 
 from app.client import GoogleClient
@@ -8,7 +9,7 @@ from app.repository import UserRepository
 from app.schema import UserLoginSchema, UserCreateSchema
 from jose import jwt, JWTError
 import datetime as dt
-from datetime import timedelta
+from datetime import timedelta,datetime
 
 from app.settings import Settings
 
@@ -35,7 +36,7 @@ class AuthService:
 
 
     def generate_access_token(self,user_id:int) -> str:
-        expire_date_unix = (dt.datetime.utcnow() + timedelta(days=7)).timestamp()
+        expire_date_unix = (dt.datetime.now(tz=dt.UTC) + timedelta(days=7)).timestamp()
         token = jwt.encode(
             {'user_id': user_id, 'expire': expire_date_unix},
             self.settings.JWT_SECRET_KEY,
