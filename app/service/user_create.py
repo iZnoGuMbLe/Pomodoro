@@ -1,6 +1,6 @@
 
 from dataclasses import dataclass
-from app.repository.user_repo import UserRepository
+from app.repository.user_repo_fixt import UserRepository
 from app.schema import UserLoginSchema
 
 from app.service.auth import AuthService

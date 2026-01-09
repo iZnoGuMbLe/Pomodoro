@@ -6,11 +6,12 @@ from app.models import UserProfile
 from app.schema import UserCreateSchema
 
 
+
 @dataclass
 class UserRepository:
     db_session: AsyncSession
 
-    async def create_user_repo(self, user:UserCreateSchema ,) -> UserProfile:
+    async def create_user_repo(self, user:UserCreateSchema) -> UserProfile:
         query = insert(UserProfile).values(
             **user.model_dump()
         ).returning(UserProfile.id)

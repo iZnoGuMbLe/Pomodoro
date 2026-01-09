@@ -51,7 +51,7 @@ async def get_auth_service(
         google_client: GoogleClient = Depends(get_google_client),
         yandex_client: YandexClient = Depends(get_yandex_client)
 ) -> AuthService:
-    return AuthService(user_repository=user_repository,settings=Settings(), google_client=google_client, yandex_client=yandex_client)
+    return
 
 
 async def get_user_service(

@@ -1,5 +1,5 @@
 from app.repository.task_repository import TaskRepository
 from app.repository.cache_task_repo import CacheTask
-from app.repository.user_repo import UserRepository
+from app.repository.user_repo_fixt import UserRepository
 
 __all__ = ['TaskRepository', 'CacheTask', 'UserRepository']
